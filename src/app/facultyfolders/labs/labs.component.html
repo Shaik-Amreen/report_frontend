@@ -1,0 +1,76 @@
+
+<h2 style="padding:0.5vw;padding-left: 2vw;color: crimson;font-family: serif; box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);"><strong>
+    UPLOAD LAB MARKS</strong></h2>
+
+<div class="table-responsive layout">
+    <div *ngIf="savingMode!='Saved' else saved">
+    <br><div><br>
+   <form style="color: grey;" [formGroup]="classinfo" (ngSubmit)="save()">
+       <div style="display: flex;">
+        <div *ngIf="fetched==true" style="color: crimson;font-weight: 700">
+          <br>{{classinfo.value.subjectcode | uppercase}} {{data[0].subjects[0].subjectname | uppercase}} - {{classinfo.value.department | uppercase}}  {{classinfo.value.section | uppercase}}
+          {{classinfo.value.year}} YEAR {{classinfo.value.sem}} SEMESTER {{classinfo.value.yearofjoining}} - {{data[0].subjects[0].subjectfaculty | uppercase}}</div>
+    <div *ngIf="fetched==false">
+        <label>YEAR OF JOINING</label>
+        <input formControlName="yearofjoining" class="form-control" type="number" min=2000>
+    </div>
+    <div *ngIf="fetched==false" style="margin-left: 1vw;">
+        <label>YEAR</label>
+        <input formControlName="year" class="form-control" type="number" min="1" max="4">
+    </div>
+    <div *ngIf="fetched==false" style="margin-left: 1vw;">
+          <label>SEMESTER</label>
+        <input formControlName="sem" class="form-control" type="number" min="1" max="2">
+      </div>
+      <div *ngIf="fetched==false" style="margin-left: 1vw;">
+          <label>DEPARTMENT</label>
+        <select class="form-control" formControlName="department">
+            <option value=" " disabled selected>SELECT</option>
+            <option value="CSE">CSE</option>
+            <option value="ECE">ECE</option>
+            <option value="EEE">EEE</option>
+            <option value="MECH">MECHANICAL</option>
+            <option value="CIV">CIVIL</option>
+            <option value="CST">CST</option>
+        </select>
+      </div>
+      <div *ngIf="fetched==false" style="margin-left: 1vw;">
+        <label>SUBJECT CODE</label>
+      <input formControlName="subjectcode" class="form-control">
+    </div>
+    <div *ngIf="fetched==false" style="margin-left: 1vw;">
+        <label>SECTION</label>
+      <input formControlName="section" class="form-control">
+    </div>
+      <div style="margin-left: 2vw;" *ngIf="classinfo.valid==true && fetched==false"><br>
+      <button  type="button" (click)="fetch()"  style="padding: 10%;background-color: crimson;">SUBMIT</button></div>
+    </div>
+      <div *ngIf="fetched==true">
+        <button *ngIf="saveMode==true && classinfo.status=='VALID'" type="submit">{{savingMode}} DATA</button><br><br>
+        <textarea formControlName="ques" class="form-control" placeholder="enter questions ..."></textarea><br>
+    <div [formGroup]="classinfo">
+            <div formArrayName="questions">
+            <table class="table text-center"  >
+                <tr ><th>ROLLNUMBER</th><th>MARKS</th></tr>
+              <tr *ngFor="let quest of controls; index as i" [formGroupName]="i" id="container">
+                      <td>{{data[i].rollnumber}}</td>
+                      <td><input  style="border-bottom: 0.5px solid lightgrey;" class="form-control" type="number" min=0 formControlName="marks"></td>
+                      
+                </tr>
+            </table>
+        
+            </div>
+    </div>
+    
+    
+    
+                 </div>
+  </form><br>
+  
+            </div><br>
+     </div>
+
+     <ng-template #saved>
+        SUCCESSFULLY SAVED
+    </ng-template>
+</div>

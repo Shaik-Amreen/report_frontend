@@ -1,0 +1,7 @@
+<div style="box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);background-color: crimson;text-align: right;" >
+    <button  routerLink="/student"  routerLinkActive="clicked" [routerLinkActiveOptions]="{ exact: true }">FEEDBACK</button>
+    <button  routerLink="/student/changepassword" routerLinkActive="clicked" >CHANGE PASSWORD</button>
+    <button>{{mail}}</button>
+    <button (click)="logout()">LOGOUT</button>
+</div>
+<router-outlet></router-outlet>

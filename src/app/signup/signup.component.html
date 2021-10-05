@@ -1,0 +1,47 @@
+<link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<div class="container">
+    <section id="formHolder">
+ 
+       <div class="row">
+ 
+          <!-- Brand Box -->
+          <div class="col-sm-6 brand">
+             <a href="#" class="logo">AITS &nbsp;<span> .</span></a>
+ 
+             <div class="heading">
+                <h2>REPORTS</h2>
+                <p>generation</p>
+             </div>
+ 
+             <div class="success-msg">
+                <p>Great! You are one of our members now</p>
+                <a href="#" class="profile">Your Profile</a>
+             </div>
+          </div>
+ 
+          
+          <!-- Form Box -->
+          <div class="col-sm-6 form" >
+             <!-- Signup Form -->
+             <div class="signup form-peice">           
+                <form [formGroup]="adminSignUpForm" (ngSubmit)="onAdminSubmit()">
+                    <div *ngIf="userExists" class="text-center danger"><i class='bx bxs-error'></i>&nbsp;User already exists</div>  <br> 
+                   <input formControlName="name" placeholder="USER NAME"><br>
+                   <input formControlName="mail" placeholder=" MAIL"><br>
+                   <input formControlName="contact"  placeholder="CONTACT" type="number" pattern="(0|91)?[7-9][0-9]{9}"><br>
+                   <input formControlName="designation" placeholder="DESIGNATION"><br>
+                   <input formControlName="password" type="password" placeholder="PASSWORD"><br>
+                   <input formControlName="confirmpassword" type="password" pattern="{{adminSignUpForm.value.password}}" placeholder="CONFIRM PASSWORD"><br>
+                   <button type="submit" [disabled]="!adminSignUpForm.valid">SIGN UP</button>
+                   <a routerLink="/AITS">Have an account ? </a>
+                   
+                </form>
+             </div><!-- End  Admin Signup Form -->
+        </div>
+       
+       </div>
+ 
+    </section>
+ </div>
+ 

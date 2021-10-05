@@ -1,0 +1,40 @@
+<div class="table-responsive layout">
+    <div *ngIf="savingMode!='Saved' else saved">
+        <span style="cursor: pointer;color: crimson;float: right;"><div><strong>Excel Format</strong><br>
+            <table class="table  text-center" style="color:grey;width: 30vw;font-size: 12px;"><tr style="border-bottom:0.5px solid lightgrey">
+                <td >Subjectcode&nbsp;</td><td>&nbsp;PO 1 ==== po15&nbsp;</td></tr><tr></tr>
+                <tr><td style="color: lightblue;">*******</td><td><td><td></td><td></td><td><td><td></td></tr></table></div></span><br>
+    <br><div><br>
+    <input type="file" accept=".xlsx" multiple="false"(change)="onfilesubmit($event)"><br>
+    <button *ngIf="saveMode" (click)="save()">{{savingMode}} DATA</button><br>
+    </div><br>
+             <table class="table text-center ">
+                 <th *ngFor="let head of keys" style="background-color:crimson;color: white;padding: 0.5%;font-weight: 500;">
+                    {{head | uppercase}}</th>
+                 <tr *ngFor="let row of mapping" style="color: grey;">
+                     <td style="padding: 0.2%;">
+                             {{row.subjectcode}} </td> 
+                     <td>{{row.po1}}</td>
+                     <td>{{row.po2}}</td>
+                     <td>{{row.po3}}</td>
+                     <td>{{row.po4}}</td>
+                     <td>{{row.po5}}</td>
+                      <td>{{row.po6}}</td>
+                      <td>{{row.po7}}</td>
+                      <td>{{row.po8}}</td>
+                      <td>{{row.po9}}</td>
+                      <td>{{row.po10}}</td>
+                      <td>{{row.po11}}</td>
+                      <td>{{row.po12}}</td>
+                      <td>{{row.po13}}</td>
+                      <td>{{row.po14}}</td>
+                      <td>{{row.po15}}</td>
+                 </tr>
+                 
+             </table>
+     </div>
+
+     <ng-template #saved><br>
+        SUCCESSFULLY SAVED
+    </ng-template>
+</div>

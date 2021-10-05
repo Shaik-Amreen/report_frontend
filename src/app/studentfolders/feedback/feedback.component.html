@@ -1,0 +1,46 @@
+<div class="layout" *ngIf="savedfeed==false else saved">
+    <br><br>
+    SUBJECT CODE <br>
+    <select [(ngModel)]="feedsub" name="feedsub" class="form-control" style="width: 30vw;">
+        <option disabled selected value="select">SELECT</option>
+        <option *ngFor="let a of allsubs" value={{a}}>{{a}}</option>
+    </select><br>
+   <button style="float: right;" *ngIf="classinfo.status=='VALID'" (click)="save()">SAVE</button>
+    <div *ngFor="let a of allsubques">
+        <div *ngIf="a.subjectcode==feedsub " [formGroup]="classinfo">
+            <div *ngFor="let q of ques;index as i"><br>
+        <strong> {{i+1}} . {{a[q] }} </strong><br>
+         <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name={{q}} id="inlineRadio" formControlName={{q}} value="A">
+            <label class="form-check-label" for="inlineRadio1">A</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name={{q}} id="inlineRadio" formControlName={{q}} value="B">
+            <label class="form-check-label" for="inlineRadio2">B</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name={{q}} id="inlineRadio" formControlName={{q}} value="C">
+            <label class="form-check-label" for="inlineRadio3">C</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name={{q}} id="inlineRadio" formControlName={{q}} value="D">
+            <label class="form-check-label" for="inlineRadio4">D</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name={{q}} id="inlineRadio" formControlName={{q}} value="E">
+            <label class="form-check-label" for="inlineRadio5">E</label>
+          </div>
+        </div>
+        <br><br>
+       <strong>REMARKS</strong><br>
+        <textarea formControlName="remarks" class="form-control"></textarea>
+        <br><br>
+        </div>
+        <div *ngIf="feedsub!='' && a.subjectcode!=feedsub" style="color: crimson;">
+            <strong> FEEDBACK QUESTIONS ARE NOT UPLOADED</strong>
+        </div>
+    </div>
+</div>
+<ng-template #saved>
+<div class="layout"><br><br>SUCCESSFULLY SAVED</div>
+</ng-template>

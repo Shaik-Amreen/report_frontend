@@ -1,0 +1,70 @@
+
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<body>
+ <div [ngClass]="navMode ? 'sidebar active' : 'sidebar'">
+   <div class="logo_content">
+     <div class="logo">
+       <div class="logo_name">REPORTS</div>
+     </div>
+     <i class='bx bx-menu-alt-right' (click)="changeNav()" id="btn" ></i>
+   </div>
+   <ul class="nav_list">
+     <li>
+       <a  style="border-radius: 50px;" routerLink="/faculty"  routerLinkActive="clicked" [routerLinkActiveOptions]="{ exact: true }">
+         <i class='bx bx-upload'></i>
+         <span class="links_name">Upload marks</span>
+       </a>
+       <span class="tooltip">Upload marks</span>
+     </li>
+    <li>
+      <a  style="border-radius: 50px;" routerLink="/faculty/co"  routerLinkActive="clicked">
+       <i class='bx bx-book-bookmark'></i>
+        <span class="links_name">Upload CO data</span>
+      </a>
+      <span class="tooltip">Upload CO data</span>
+    </li>
+    <li>
+      <a  style="border-radius: 50px;" routerLink="/faculty/assignments"  routerLinkActive="clicked">
+       <i class='bx bx-book-bookmark'></i>
+        <span class="links_name">Upload assignments</span>
+      </a>
+      <span class="tooltip">Upload assignments</span>
+    </li>
+    <li>
+      <a  style="border-radius: 50px;" routerLink="/faculty/reports"  routerLinkActive="clicked">
+       <i class='bx bx-book-bookmark'></i>
+        <span class="links_name">Reports</span>
+      </a>
+      <span class="tooltip">Reports</span>
+    </li>
+    <li>
+      <a  style="border-radius: 50px;" routerLink="/faculty/feedback"  routerLinkActive="clicked">
+       <i class='bx bx-book-bookmark'></i>
+        <span class="links_name">Feedback questions</span>
+      </a>
+      <span class="tooltip">Feedback questions</span>
+    </li>
+    <li>
+      <a  style="border-radius: 50px;" routerLink="/faculty/labs"  routerLinkActive="clicked">
+       <i class='bx bx-book-bookmark'></i>
+        <span class="links_name">LABS</span>
+      </a>
+      <span class="tooltip">LABS</span>
+    </li>
+    <li>
+      <a   routerLinkActive="clicked" (click)="logout()" style="background-color: blanchedalmond;color: crimson;border-radius: 50px;">
+       <i class='bx bx-power-off'></i>
+        <span class="links_name" style="font-weight: 900;font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">LOGOUT</span>
+      </a>
+      <span class="tooltip">LOGOUT</span>
+    </li>
+   </ul>
+ </div>
+ <div class="home_content">
+   <router-outlet></router-outlet>
+ </div>
+
+
+</body>
+

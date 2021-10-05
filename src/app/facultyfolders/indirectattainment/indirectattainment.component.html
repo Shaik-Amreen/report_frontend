@@ -1,0 +1,30 @@
+
+
+<h2 style="padding:0.5vw;padding-left: 2vw;color: crimson;font-family: serif; box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);"><strong>
+    UPLOAD FEEDBACK QUESTIONS</strong></h2>
+
+<div class="table-responsive layout">
+    <div *ngIf="savingMode!='Saved' else saved">
+    <br><div><br>
+   <form style="color: grey;" [formGroup]="classinfo" (ngSubmit)="save()">
+       <div>
+      <div  style="margin-left: 1vw;">
+        <label>SUBJECT CODE</label>
+      <input style="width: 20vw;" formControlName="subjectcode" class="form-control">
+    </div>
+    
+
+      <div>
+        <button *ngIf="classinfo.status=='VALID'" type="submit">{{savingMode}} DATA</button><br><br>
+        <textarea style="margin-left: 1vw;width: 70vw;" *ngFor="let a of ques" formControlName={{a}} class="form-control" placeholder="enter questions ..."></textarea><br>
+        </div>
+        </div>
+  </form><br>
+  
+            </div><br>
+     </div>
+
+     <ng-template #saved>
+        SUCCESSFULLY SAVED
+    </ng-template>
+</div>

@@ -1,0 +1,426 @@
+<h2 style="padding:0.5vw;padding-left: 2vw;color: crimson;font-family: serif; box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);"><strong>
+  REPORTS</strong></h2>
+
+  <div class="table-responsive layout">
+    <div *ngIf="savingMode!='Saved'">
+    <div><br>
+   <form style="display: flex;color: grey;" [formGroup]="classinfo">
+    
+    <div *ngIf="fetched==false">
+      <label>YEAR OF JOINING</label>
+      <input formControlName="yearofjoining" class="form-control" type="number" min=2000>
+  </div>
+  <div *ngIf="fetched==false" style="margin-left: 1vw;">
+      <label>YEAR</label>
+      <input formControlName="year" class="form-control" type="number" min="1" max="4">
+  </div>
+  <div *ngIf="fetched==false" style="margin-left: 1vw;">
+        <label>SEMESTER</label>
+      <input formControlName="sem" class="form-control" type="number" min="1" max="2">
+    </div>
+    <div *ngIf="fetched==false"  style="margin-left: 1vw;">
+          <label>DEPARTMENT</label>
+        <select class="form-control" formControlName="department">
+            <option value=" " disabled selected>SELECT</option>
+            <option value="CSE">CSE</option>
+            <option value="ECE">ECE</option>
+            <option value="EEE">EEE</option>
+            <option value="MECH">MECHANICAL</option>
+            <option value="CIV">CIVIL</option>
+            <option value="CST">CST</option>
+        </select>
+      </div>
+    <div *ngIf="fetched==false" style="margin-left: 1vw;">
+        <label>SUBJECT CODE</label>
+        <input formControlName="subjectcode" class="form-control" >
+    </div>
+    <div *ngIf="fetched==false" style="margin-left: 1vw;">
+          <label>SUBJECT NAME</label>
+        <input formControlName="subjectname" class="form-control" >
+      </div>
+      <div  style="margin-left: 2vw;" *ngIf="classinfo.valid==true && fetched==false"><br>
+        <button  type="button" (click)="fetch()"  style="padding: 10%;background-color: crimson;">SUBMIT</button>
+      </div>
+  </form><br>
+
+<button (click)="downloadPDF()" *ngIf="fetched==true" style="padding:5px;background-color: crimson;float: left;border-radius: 50px;">GENERATE PDF</button><br><br>
+
+<div class="container">
+  <div id="report" #report>
+    <div *ngIf="fetched==true">
+      <div  style="font-weight: 700;text-align: center;"><br>{{classinfo.value.subjectcode | uppercase}} - {{classinfo.value.department | uppercase}} {{classinfo.value.year}} YEAR {{classinfo.value.sem}} SEMESTER {{classinfo.value.yearofjoining}}  REPORT</div>
+   <br><span style="font-size: 14px;"> SUBJECT CODE : {{classinfo.value.subjectcode}} &nbsp;&nbsp;<br>SUBJECT NAME : {{classinfo.value.subjectname}}<br></span>
+    <br><span style="font-size: 14px;font-weight: 600;">COURSE OUTCOMES</span>
+    <ul style="font-size: 13px;">
+        <li> {{codetails.co1}}</li>
+        <li> {{codetails.co2}}</li>
+        <li> {{codetails.co3}}</li>
+        <li> {{codetails.co4}}</li>
+        <li> {{codetails.co5}}</li>
+    </ul><br>
+      <div *ngIf="exams.includes('mid1')">
+        <h4><strong>MID 1</strong></h4><br>
+      <table style="color: gray;" class="table table-bordered  text-center" *ngFor="let a of midoneco">
+        <thead>
+          <tr>
+           <th  colSpan="{{ques.mid1[a].length+1}}">{{a | uppercase}}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>#</th>
+            <th *ngFor="let c of ques.mid1[a]">{{c | uppercase}}</th>
+          </tr>
+          <tr *ngFor="let k of roll;index as i">
+            <th scope="row">{{k}}</th>
+            
+          <td *ngFor="let c of ques.mid1[a]">{{am.mid1[a][i][c]}}</td>
+
+          </tr>
+
+        </tbody>
+      </table>
+      </div>
+
+
+
+
+
+<br><br>
+      <div *ngIf="exams.includes('mid2')">
+        <h4><strong>MID 2</strong></h4><br>
+      <table style="color: gray;" class="table table-bordered  text-center" *ngFor="let a of midtwoco">
+        <thead>
+          <tr>
+           <th  colSpan="{{ques.mid2[a].length+1}}">{{a | uppercase}}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>#</th>
+            <th *ngFor="let c of ques.mid2[a]">{{c | uppercase}}</th>
+          </tr>
+          <tr *ngFor="let k of roll;index as i">
+            <th scope="row">{{k}}</th>
+            
+          <td *ngFor="let c of ques.mid2[a]">{{am.mid2[a][i][c]}}</td>
+          </tr>
+
+        </tbody>
+      </table>
+      </div>
+     <br>
+     
+     
+     
+     <div *ngIf="exams.includes('mid1')">
+       <br><strong>CIE GRADES </strong><br>
+      <table  class="table table-bordered table-dark text-center">
+        <thead>
+          <tr>
+           <th  colSpan="2" *ngFor="let a of cos">
+             {{a | uppercase}}</th>
+             </tr>
+        </thead>
+
+        <tbody>
+          <tr><th colspan="2" *ngFor="let a of cos">
+          <table class="table table-bordered table-dark text-center">
+            <tr>
+            <td>G3</td>
+            <td>{{midgrade3[a]}}</td>
+            </tr>
+          <tr>
+            <td>G2</td>
+            <td>{{midgrade2[a]}}</td>
+          </tr>
+          <tr>
+            <td>G1</td>
+            <td>{{midgrade1[a]}}</td>
+          </tr>
+          </table>
+        </th>
+      </tr>
+        </tbody>
+      </table>
+          <br>
+          <br><strong>  CIE  ATTAINMENT </strong><br>
+          <table style="color: gray;" class="table table-bordered  text-center">
+            <thead>
+              <tr>
+               <th>CO</th>
+               <th>CO Target</th>
+               <th>CO Attain</th>
+               <th>CO gap</th>
+                 </tr>
+            </thead>
+    
+            <tbody>
+                <tr *ngFor="let a of cos">
+                  <td>{{a | uppercase}}</td>
+                  <td>{{ cotarget[a]}}</td>
+                  <td>{{((midgrade3[a]/midattempted[a])*100).toFixed(2)}}</td>
+                  <td>{{((((midgrade3[a]/midattempted[a])*100))-cotarget[a]).toFixed(2)}}</td>
+                </tr>
+            </tbody>
+          </table>
+
+
+
+
+
+     </div>
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     <br>
+      <div *ngIf="exams.includes('external')">
+        <h4><strong>EXTERNAL</strong><br></h4>  <br>
+      <table style="color: gray;" class="table table-bordered  text-center" *ngFor="let a of externalco">
+        <thead>
+          <tr>
+            <th  colSpan="{{ques.external[a].length+1}}">{{a | uppercase}}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>#</th>
+            <th *ngFor="let c of ques.external[a]">{{c | uppercase}}</th>
+          </tr>
+          <tr *ngFor="let k of roll;index as i">
+            <th scope="row">{{k}}</th>
+            <td *ngFor="let c of ques.external[a]">{{am.external[a][i][c]}}</td>
+          </tr>
+
+        </tbody>
+      </table>
+
+
+
+   <br><br><br><strong>SEE GRADES </strong><br>
+        <table  class="table table-bordered table-dark text-center">
+          <thead>
+            <tr>
+             <th  colSpan="2" *ngFor="let a of cos">
+               {{a | uppercase}}</th>
+               </tr>
+          </thead>
+  
+          <tbody>
+            <tr><th colspan="2" *ngFor="let a of externalco">
+            <table class="table table-bordered table-dark text-center">
+              <tr>
+              <td>G3</td>
+              <td>{{externalgrade3[a]}}</td>
+              </tr>
+            <tr>
+              <td>G2</td>
+              <td>{{externalgrade2[a]}}</td>
+            </tr>
+            <tr>
+              <td>G1</td>
+              <td>{{externalgrade1[a]}}</td>
+            </tr>
+            </table>
+          </th>
+        </tr>
+          </tbody>
+        </table>
+            <br>
+            
+            <br><br><strong>SUBJECT FEEDBACK </strong><br>
+        <table  class="table table-bordered table-dark text-center">
+          <thead>
+            <tr>
+             <th  colSpan="2" *ngFor="let a of cos">
+               {{a | uppercase}}</th>
+               </tr>
+          </thead>
+  
+          <tbody>
+            <tr><th colspan="2" *ngFor="let a of excos">
+            <table class="table table-bordered table-dark text-center">
+              <tr>
+              <td>A</td>
+              <td>{{a.A.length/2}}</td>
+              </tr>
+            <tr>
+              <td>B</td>
+              <td>{{a.B.length/2}}</td>
+            </tr>
+            <tr>
+              <td>C</td>
+              <td>{{a.C.length/2}}</td>
+            </tr>
+            <tr>
+              <td>D</td>
+              <td>{{a.D.length/2}}</td>
+            </tr>
+            <tr>
+              <td>E</td>
+              <td>{{a.E.length/2}}</td>
+            </tr>
+            </table>
+          </th>
+        </tr>
+          </tbody>
+        </table>
+        <br><strong>  SEE DIRECT ATTAINMENT </strong><br>
+        <table style="color: gray;" class="table table-bordered  text-center">
+          <thead>
+            <tr>
+             <th>CO</th>
+             <th>CO Target</th>
+             <th>CO Attain</th>
+             <th>CO gap</th>
+               </tr>
+          </thead>
+  
+          <tbody>
+              <tr *ngFor="let a of externalco">
+                <td>{{a | uppercase}}</td>
+                <td>{{ cotarget[a]}}</td>
+                <td>{{((externalgrade3[a]/externalattempted[a])*100).toFixed(2)}}</td>
+                <td>{{((((externalgrade3[a]/externalattempted[a])*100))-cotarget[a]).toFixed(2)}}</td>
+              </tr>
+          </tbody>
+        </table>
+
+      
+            <br><strong>  SUBJECT INDIRECT ATTAINMENT </strong><br>
+            <table style="color: gray;" class="table table-bordered  text-center">
+              <thead>
+                <tr>
+                 <th>CO</th>
+                 <th>CO Attain</th>
+                
+                   </tr>
+              </thead>
+      
+              <tbody>
+                  <tr *ngFor="let a of excos;index as i">
+                    <td>{{externalco[i] | uppercase}}</td>
+                    <td>{{ ((((a.A.length/2)*5)+((a.B.length/2)*4)+((a.C.length/2)*3)+((a.D.length/2)*2)+((a.E.length/2)))/(((a.A.length/2)+(a.B.length/2)+(a.C.length/2)+(a.D.length/2)+(a.E.length/2))*5))*100 }}</td>
+                  
+                  </tr>
+              </tbody>
+            </table>
+  
+  
+            <br><strong> TOTAL CO  ATTAINMENT </strong><br>
+            <table style="color: gray;" class="table table-bordered text-center">
+              <thead>
+                <tr>
+                 <th>CO</th>
+                 <th>CO T Attain</th>
+                   </tr>
+              </thead>
+      
+              <tbody>
+                  <tr *ngFor="let a of externalco;index as i">
+                    <td>{{a | uppercase}}</td>
+                    <td>{{ ((0.8*((0.7*((externalgrade3[a]/externalattempted[a])*100))+
+                            (0.3*((midgrade3[a]/midattempted[a])*100))))+
+                           (0.2* (((((excos[i].A.length/2)*5)+((excos[i].B.length/2)*4)+((excos[i].C.length/2)*3)+((excos[i].D.length/2)*2)+((excos[i].E.length/2)))/(((excos[i].A.length/2)+(excos[i].B.length/2)+(excos[i].C.length/2)+(excos[i].D.length/2)+(excos[i].E.length/2))*5))*100))).toFixed(2) }}</td>
+                  </tr>
+              </tbody>
+            </table>
+  
+<br><strong>PO ATTAINMENT</strong><br>
+
+<table style="color: gray;" class="table table-bordered  text-center">
+  <thead>
+    <tr>
+     <th>PO</th>
+     <th >COS</th>
+     <th>PO STRENGTH</th>
+     <th>PO TARGET</th>
+     <th>PO ATTAINMENT</th>
+     <th>PO GAP</th>
+       </tr>
+  </thead>
+
+  <tbody>
+      <tr *ngFor="let a of ponum;index as i">
+        <td>{{a | uppercase}}</td>
+        <td ><span *ngFor="let b of poarr[a]">{{b | uppercase}} , </span></td>
+        <td>{{postr[i] }}</td>
+        <td>{{pot[a]}}</td>
+        <td>{{((postr[i]/3)*podmod[a]).toFixed(2)}}</td>
+        <td>{{(((postr[i]/3)*podmod[a])-pot[a]).toFixed(2)}}</td>
+      </tr>
+  </tbody>
+</table>
+  
+  
+  
+   
+        
+
+
+
+       
+
+      </div>
+
+<br>
+<div style="font-size: 12px;"><strong>SUBJECT FACULTY</strong>
+  
+  <div *ngFor="let s of subjectfaculty">{{ s | uppercase}}</div>
+</div>
+
+
+
+      </div></div></div></div></div></div>
+
+<!-- ///////////////////////////////////////////// -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

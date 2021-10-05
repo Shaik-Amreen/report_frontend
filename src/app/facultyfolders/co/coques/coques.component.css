@@ -1,0 +1,13 @@
+.layout{
+    margin:4vw;
+    height:85%;
+    margin-top: 0%;
+}
+button{
+    float: right;
+    color: honeydew;
+    background-color:	#142257;
+    border: none;
+    font-weight:500;
+    padding: 0.5%;
+}

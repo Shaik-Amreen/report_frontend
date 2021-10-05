@@ -1,0 +1,101 @@
+
+<h2 style="padding:0.5vw;padding-left: 2vw;color: crimson;font-family: serif; box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);"><strong>
+    UPLOAD MARKS</strong></h2>
+
+<div class="table-responsive layout">
+    <div *ngIf="savingMode!='Saved' else saved">
+        <span style="cursor: pointer;color: crimson;float: right;"><div><strong>Excel Format</strong><br>
+            <table class="table  text-center" style="color:grey;width: 20vw;font-size: 12px;"><tr style="border-bottom:0.5px solid lightgrey">
+               <td>rollnumber</td> <td>o1.....&nbsp;....q1....</td></tr><tr></tr>
+                <tr><td style="color: lightblue;">**********</td><td>marks</td><td></td></tr></table></div></span><br>
+    <br><div><br>
+   <form style="color: grey;" [formGroup]="classinfo" (ngSubmit)="save()">
+       <div style="display: flex;">
+        <div *ngIf="fetched==true" style="color: crimson;font-weight: 700"><br>{{classinfo.value.subjectcode | uppercase}} - {{classinfo.value.department | uppercase}} {{classinfo.value.year}} YEAR {{classinfo.value.sem}} SEMESTER {{classinfo.value.yearofjoining}} {{classinfo.value.examtype | uppercase}} MARKS</div>
+    <div *ngIf="fetched==false">
+        <label>YEAR OF JOINING</label>
+        <input formControlName="yearofjoining" class="form-control" type="number" min=2000>
+    </div>
+    <div *ngIf="fetched==false" style="margin-left: 1vw;">
+        <label>YEAR</label>
+        <input formControlName="year" class="form-control" type="number" min="1" max="4">
+    </div>
+    <div *ngIf="fetched==false" style="margin-left: 1vw;">
+          <label>SEMESTER</label>
+        <input formControlName="sem" class="form-control" type="number" min="1" max="2">
+      </div>
+      <div *ngIf="fetched==false" style="margin-left: 1vw;">
+          <label>DEPARTMENT</label>
+        <select class="form-control" formControlName="department">
+            <option value=" " disabled selected>SELECT</option>
+            <option value="CSE">CSE</option>
+            <option value="ECE">ECE</option>
+            <option value="EEE">EEE</option>
+            <option value="MECH">MECHANICAL</option>
+            <option value="CIV">CIVIL</option>
+            <option value="CST">CST</option>
+        </select>
+      </div>
+      <div *ngIf="fetched==false" style="margin-left: 1vw;">
+        <label>SUBJECT CODE</label>
+      <input formControlName="subjectcode" class="form-control">
+    </div>
+      <div style="margin-left: 1vw;"  *ngIf="fetched==false">
+        <label>EXAM TYPE</label>
+      <select class="form-control" formControlName="examtype">
+          <option value="mid1">MID 1</option>
+          <option value="mid2">MID 2</option>
+          <option value="external">EXTERNAL</option>
+          <option value="assignment">ASSIGNMENT</option>
+      </select>
+    </div>
+      <div style="margin-left: 2vw;" *ngIf="classinfo.valid==true && fetched==false"><br>
+      <button  type="button" (click)="fetch()"  style="padding: 10%;background-color: crimson;">SUBMIT</button></div>
+    </div>
+      <div *ngIf="fetched==true">
+        <button *ngIf="saveMode==true && classinfo.status=='VALID'" type="submit">{{savingMode}} DATA</button><br><br>
+        <div style="color: crimson" *ngIf="classinfo.value.examtype=='assignment' && saveMode==false " >
+           <strong>ASSIGNMENT</strong> &nbsp;
+                <select class="form-control" formControlName="assignum"  style="border-bottom: 0.5px solid lightgrey;width: 70px">
+                     <option value="1">1</option>
+                     <option value="2"> 2</option>
+                     <option value="3"> 3</option>
+                     <option value="4"> 4</option>
+                     <option value="5"> 5</option>
+                </select>
+            </div> 
+                 </div>
+  </form>
+
+
+  <div *ngIf="classinfo.valid==true">
+      
+    <input type="file" *ngIf="fetched==true && saveMode==false" accept=".xlsx" multiple="false"(change)="onfilesubmit($event)"><br>
+     <table class="table text-center ">
+                <tr><th *ngFor="let head of keys" style="background-color:crimson;color: white;padding: 0.5%;font-weight: 500;">
+                    {{head | uppercase}}</th></tr>
+                 <tr *ngFor="let row of mapping" style="color: grey;">
+                     <td style="padding: 0.2%;">
+                             {{row.rollnumber}} 
+                     </td>
+                     <td *ngIf="row.o1 &gt; -1">{{row.o1}}</td>
+                     <td *ngIf="row.o2 &gt; -1">{{row.o2}}</td>
+                     <td *ngIf="row.o3 &gt; -1">{{row.o3}}</td><td *ngIf="row.o4 &gt; -1">{{row.o4}}</td><td *ngIf="row.o5 &gt; -1">{{row.o5}}</td><td *ngIf="row.o6 &gt; -1">{{row.o6}}</td><td *ngIf="row.o7 &gt; -1">{{row.o7}}</td>
+                     <td *ngIf="row.o8 &gt; -1">{{row.o8}}</td><td *ngIf="row.o9 &gt; -1">{{row.o9}}</td><td *ngIf="row.o10 &gt; -1">{{row.o10}}</td>
+                     <td *ngIf="row.q1 &gt; -1">{{row.q1}}</td>
+                     <td *ngIf="row.q2 &gt; -1">{{row.q2}}</td>
+                     <td *ngIf="row.q3 &gt; -1">{{row.q3}}</td><td *ngIf="row.q4 &gt; -1">{{row.q4}}</td><td *ngIf="row.q5 &gt; -1">{{row.q5}}</td><td *ngIf="row.q6 &gt; -1">{{row.q6}}</td><td *ngIf="row.q7 &gt; -1">{{row.q7}}</td>
+                     <td *ngIf="row.q8 &gt; -1">{{row.q8}}</td><td *ngIf="row.q9 &gt; -1">{{row.q9}}</td><td *ngIf="row.q10 &gt; -1">{{ row.q10 }}</td>
+                     
+                 </tr>
+                 
+             </table>
+             </div>
+  
+            </div><br>
+     </div>
+
+     <ng-template #saved>
+        SUCCESSFULLY SAVED
+    </ng-template>
+</div>

@@ -1,0 +1,64 @@
+
+<h2 style="padding:0.5vw;padding-left: 2vw;color: crimson;font-family: serif; box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);"><strong>
+    UPLOAD ELECTIVES</strong></h2>
+
+<div class="table-responsive layout">
+    <div *ngIf="savingMode!='Saved' else saved">
+        <span style="cursor: pointer;color: crimson;float: right;"><div><strong>Excel Format</strong><br>
+            <table class="table  text-center" style="color:grey;width: 20vw;font-size: 12px;"><tr style="border-bottom:0.5px solid lightgrey">
+               <td>rollnumber</td> <td>Subject code&nbsp;</td><td>&nbsp;Subject name&nbsp;</td></tr><tr></tr>
+                <tr><td style="color: lightblue;">**********</td><td></td><td></td></tr></table></div></span><br>
+    <br><div><br>
+   <form style="display: flex;color: grey;" [formGroup]="classinfo">
+    <div>
+        <label>YEAR OF JOINING</label>
+        <input formControlName="yearofjoining" class="form-control" type="number" min=2000>
+    </div>
+    <div style="margin-left: 1vw;">
+        <label>YEAR</label>
+        <input formControlName="year" class="form-control" type="number" min="1" max="4">
+    </div>
+    <div style="margin-left: 1vw;">
+          <label>SEMESTER</label>
+        <input formControlName="sem" class="form-control" type="number" min="1" max="2">
+      </div>
+      <div style="margin-left: 1vw;">
+          <label>DEPARTMENT</label>
+        <select class="form-control" formControlName="department">
+            <option value=" " disabled selected>SELECT</option>
+            <option value="CSE">CSE</option>
+            <option value="ECE">ECE</option>
+            <option value="EEE">EEE</option>
+            <option value="MECH">MECHANICAL</option>
+            <option value="CIV">CIVIL</option>
+            <option value="CST">CST</option>
+        </select>
+      </div>
+  </form><br>
+  <div *ngIf="classinfo.valid==true">
+      
+    <input type="file" accept=".xlsx" multiple="false"(change)="onfilesubmit($event)"><br>
+    <button *ngIf="saveMode" (click)="save()">{{savingMode}} DATA</button><br><br>
+    
+             <table class="table text-center ">
+                 <th *ngFor="let head of keys" style="background-color:crimson;color: white;padding: 0.5%;font-weight: 500;">
+                    {{head | uppercase}}</th>
+                 <tr *ngFor="let row of mapping" style="color: grey;">
+                     <td style="padding: 0.2%;">
+                             {{row.rollnumber}} 
+                     </td> 
+                     <td>{{row.subjectcode}}</td>
+                     <td>{{row.subjectname}}</td>
+                     
+                     
+                 </tr>
+                 
+             </table>
+             </div>
+            </div><br>
+     </div>
+
+     <ng-template #saved>
+        SUCCESSFULLY SAVED
+    </ng-template>
+</div>

@@ -1,0 +1,36 @@
+
+<h2 style="padding:0.5vw;padding-left: 2vw;color: crimson;font-family: serif; box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);"><strong>
+    UPLOAD COs TARGET</strong></h2>
+
+<div class="table-responsive layout">
+    <div *ngIf="savingMode!='Saved' else saved">
+    <br><div><br>
+   <form style="color: grey;" [formGroup]="classinfo" (ngSubmit)="save()">
+       <div>
+<button *ngIf="classinfo.status=='VALID'">SAVE DATA</button>
+      <div  style="margin-left: 1vw">
+        <label>SUBJECT CODE</label>
+      <input formControlName="subjectcode" style="width: 150px;" class="form-control">
+    </div>
+<br>
+<div style="display: flex;" *ngFor ="let a of comax;index as i">
+    <div  style="margin-left: 1vw;">
+        <label>{{a | uppercase}}</label>
+      <input formControlName={{a}} class="form-control">
+    </div> <div  style="margin-left: 1vw;">
+        <label>{{coavg[i] | uppercase}}</label>
+      <input formControlName={{coavg[i]}} class="form-control">
+      <br>
+    </div>
+</div>
+
+    </div>
+  </form><br>
+  
+            </div><br>
+     </div>
+
+     <ng-template #saved>
+        SUCCESSFULLY SAVED
+    </ng-template>
+</div>

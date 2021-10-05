@@ -1,0 +1,78 @@
+
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<body>
+ <div [ngClass]="navMode ? 'sidebar active' : 'sidebar'">
+   <div class="logo_content">
+     <div class="logo">
+       <div class="logo_name">REPORTS</div>
+     </div>
+     <i class='bx bx-menu-alt-right' (click)="changeNav()" id="btn" ></i>
+   </div>
+   <ul class="nav_list">
+     <li>
+       <a  style="border-radius: 50px;" routerLink="/admin/"  routerLinkActive="clicked" [routerLinkActiveOptions]="{ exact: true }">
+         <i class='bx bx-upload'></i>
+         <span class="links_name">Upload Studentdata</span>
+       </a>
+       <span class="tooltip">Upload Studentdata</span>
+     </li>
+     <li>
+       <a  style="border-radius: 50px;" routerLink="/admin/commonsubjects"  routerLinkActive="clicked">
+         <i class='bx bxs-edit-alt'></i>
+         <span class="links_name">Upload subjects</span>
+       </a>
+       <span class="tooltip">Upload Subjects</span>
+     </li>
+     <li>
+       <a  style="border-radius: 50px;" routerLink="/admin/electives"  routerLinkActive="clicked">
+        <i class='bx bx-book-bookmark'></i>
+         <span class="links_name">Upload Electives</span>
+       </a>
+       <span class="tooltip">Upload Electives</span>
+     </li>
+     <li>
+      <a  style="border-radius: 50px;" routerLink="/admin/cotarget"  routerLinkActive="clicked">
+       <i class='bx bx-book-bookmark'></i>
+        <span class="links_name">Upload CO TARGET</span>
+      </a>
+      <span class="tooltip">Upload CO TARGET</span>
+    </li>
+    <li>
+      <a  style="border-radius: 50px;" routerLink="/admin/postarget"  routerLinkActive="clicked">
+       <i class='bx bx-book-bookmark'></i>
+        <span class="links_name">Upload POS target</span>
+      </a>
+      <span class="tooltip">Upload POS target</span>
+    </li>
+
+     <li>
+      <a  style="border-radius: 50px;" routerLink="/admin/reports"  routerLinkActive="clicked">
+       <i class='bx bx-book-bookmark'></i>
+        <span class="links_name">Reports</span>
+      </a>
+      <span class="tooltip">Reports</span>
+    </li>
+    <li>
+      <a  style="border-radius: 50px;" routerLink="/admin/createuser"  routerLinkActive="clicked">
+       <i class='bx bx-book-bookmark'></i>
+        <span class="links_name">Create user</span>
+      </a>
+      <span class="tooltip">Create User</span>
+    </li>
+    <li>
+      <a   routerLinkActive="clicked" (click)="logout()" style="background-color: blanchedalmond;color: crimson;border-radius: 50px;">
+       <i class='bx bx-power-off'></i>
+        <span class="links_name" style="font-weight: 900;font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">LOGOUT</span>
+      </a>
+      <span class="tooltip">LOGOUT</span>
+    </li>
+   </ul>
+ </div>
+ <div class="home_content">
+   <router-outlet></router-outlet>
+ </div>
+
+
+</body>
+

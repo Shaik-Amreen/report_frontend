@@ -1,0 +1,53 @@
+<link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<div class="container"  [ngClass]="!loginMode ? 'right-panel-active' : 'ghost'">
+	<div class="form-container sign-up-container">
+		
+			
+			<form #f="ngForm" (ngSubmit)="forget(f)" *ngIf='buttonMode!="SENT" else sent'>
+				<div class="danger" *ngIf="forgotErr"><i class='bx bxs-error'></i>&nbsp;{{mailerr}}<br><br></div>
+				<h1>Change password</h1><br/>
+				<input type="gmail" placeholder="EMAIL" required [(ngModel)]="mail" name="mail" required/><br/><br>
+				<button type="submit" [disabled]="!f.valid">{{buttonMode}}
+					<div class="spinner-grow spinner-grow-sm"  role="status" *ngIf="buttonMode=='SENDING'"></div>
+				</button>
+			<br/>
+			</form>
+			
+			<ng-template #sent>
+				<form #f="ngForm" (ngSubmit)="checkOtp(f)">
+					<div class="danger" *ngIf="invalidotp"><i class='bx bxs-error'></i>&nbsp;INVALID OTP<br><br></div>
+				<input type='number' [(ngModel)]='otp' name='otp' placeholder="ENTER OTP"/><br>
+				<button type="submit">SEND</button><br>
+				<div class="danger">Hurry Up ! {{timeRemained}} seconds remained .</div>
+			    </form>
+			</ng-template>
+		
+	</div>
+	<div class="form-container sign-in-container">
+		<form  [formGroup]="signInForm" (ngSubmit)="signIn()">
+			<div class="danger" *ngIf="errorMode"><i class='bx bxs-error'></i>&nbsp;{{errorMessage}}</div><br>
+			<h1>Sign in</h1><br/>
+			<input type="gmail" placeholder="EMAIL" formControlName="mail" required/>
+			<input type="password" placeholder="PASSWORD" formControlName="password" required/><br/>
+			<button [disabled]="!signInForm.valid">Sign In</button><br><br>
+		</form>
+	</div>
+	<div class="overlay-container">
+		<div class="overlay">
+			<div class="overlay-panel overlay-left">
+				<h1>Recieved password!</h1>
+				<p>To manage data with us please login with your personal info</p>
+				<button class="ghost" id="signIn" (click)="changeMode()">Sign In</button><br><h6 *ngIf="activate==true">OR</h6><br>
+                <button *ngIf="activate==true" class="ghost"  id="signUp" routerLink='/signup' >CREATE ACCOUNT</button>
+			</div>
+			<div class="overlay-panel overlay-right">
+				<h1>Oops!</h1>
+				<p>Forgot your password?</p>
+				<button class="ghost"  id="forgotpassword" (click)="changeMode()">CLICK HERE</button><br><h6 *ngIf="activate==true">OR</h6><br>
+                <button  *ngIf ="activate==true" class="ghost"  id="signUp" routerLink='/signup'>CREATE ACCOUNT</button>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- /^([a-zA-Z0-9]+)@mits.ac.in$/ -->

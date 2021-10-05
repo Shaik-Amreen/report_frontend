@@ -1,0 +1,14 @@
+button{
+    color: crimson;
+    outline: none;
+    border: none;
+    margin: 1vw;
+    margin-left: 2vw;
+    background-color: white;
+    padding: 1%;
+    font-weight: 700;
+    border-radius: 30px;
+}
+.clicked{
+    background-color: blanchedalmond;
+}

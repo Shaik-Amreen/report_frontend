@@ -1,0 +1,40 @@
+<div class="container table-responsive">
+    <section id="formHolder">
+ 
+       <div class="row">
+             <!-- Signup Form -->
+             <div class="signup">
+                <form [formGroup]="userSignUpForm" (ngSubmit)="onSubmitUserForm()" *ngIf="msg==false else success">
+                    <h5>USER REGISTRATION</h5><br>
+                    <label>USER NAME</label><br>
+                   <input  formControlName="name"><br><br>
+                   <label> MAIL</label><br>
+                   <input formControlName="mail" ><br><br>
+                   <label>CONTACT</label><br>
+                   <input formControlName="contact"><br><br>
+                   <label>DESIGNATION</label><br>
+                   <input formControlName="designation"><br><br>
+                   <label>ROLE</label><br>
+                   <select  formControlName="role">
+                    <option value="admin">ADMIN</option>
+                    <option value="faculty">FACULTY</option>
+                  </select><br><br>
+                    <label>PASSWORD</label><br>
+                   <input type="password"  formControlName="password" ><br><br>
+                   <label>CONFIRM PASSWORD</label><br>
+                   <input type="password"  formControlName="confirmpassword" pattern="{{userSignUpForm.value.password}}" ><br><br>
+                   <div class="row">
+                   <button class="col-3 signUp" [disabled]="!userSignUpForm.valid" type="submit">SIGN UP</button>
+                   <span class="col-1"></span>
+                   </div>
+                </form>
+               <ng-template #success>
+                  SUCCESSFULLY SAVED
+               </ng-template>
+             </div><!-- End  Admin Signup Form -->
+        </div>
+ 
+    </section>
+ </div>
+ 
+ 

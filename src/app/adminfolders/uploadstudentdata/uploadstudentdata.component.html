@@ -1,0 +1,39 @@
+
+<h2 style="padding:0.5vw;padding-left: 2vw;color: crimson;font-family: serif; box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);"><strong>UPLOAD STUDENT DATA</strong></h2>
+
+<div class="table-responsive layout">
+    <div *ngIf="savingMode!='Saved' else saved">
+        <span style="cursor: pointer;color: crimson;float: right;"><div><strong>Excel Format</strong><br>
+            <table class="table  text-center" style="color:grey;width: 50vw;font-size: 12px;"><tr style="border-bottom:0.5px solid lightgrey">
+                <td >Roll number&nbsp;</td><td>&nbsp;Name&nbsp;</td><td>&nbsp;Year&nbsp;</td><td>&nbsp;
+                    Semester&nbsp;</td><td>&nbsp;Course&nbsp;</td>
+                    <td>&nbsp;Department&nbsp;</td><td>&nbsp;Section&nbsp;</td><td>&nbsp;
+                        Year of joining&nbsp;</td></tr><tr></tr>
+                <tr><td style="color: lightblue;">**********</td><td><td><td></td><td></td><td><td><td></td></tr></table></div></span><br>
+    <br><div><br>
+    <input type="file" accept=".xlsx" multiple="false"(change)="onfilesubmit($event)"><br>
+    <button *ngIf="saveMode" (click)="save()">{{savingMode}} DATA</button><br>
+    </div><br>
+             <table class="table text-center ">
+                 <th *ngFor="let head of keys" style="background-color:crimson;color: white;padding: 0.5%;font-weight: 500;">
+                    {{head | uppercase}}</th>
+                 <tr *ngFor="let row of mapping" style="color: grey;">
+                     <td style="padding: 0.2%;">
+                             {{row.rollnumber}} 
+                     </td> 
+                     <td>{{row.name}}</td>
+                     <td>{{row.year}}</td>
+                     <td>{{row.sem}}</td>
+                     <td>{{row.course}}</td>
+                     <td>{{row.department}}</td>
+                     <td>{{row.section}}</td>
+                     <td>{{row.yearofjoining}}</td>
+                 </tr>
+                 
+             </table>
+     </div>
+
+     <ng-template #saved>
+        SUCCESSFULLY SAVED
+    </ng-template>
+</div>

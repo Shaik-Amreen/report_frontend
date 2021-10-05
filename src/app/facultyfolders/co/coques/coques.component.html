@@ -1,0 +1,40 @@
+<div class="table-responsive layout">
+    <div *ngIf="savingMode!='Saved' else saved" style="display: flex;">
+    <div style="width: 70vw;"><br>
+        <div>
+            <input type="file" accept=".xlsx" multiple="false"(change)="onfilesubmit($event)"><br>
+            <button *ngIf="saveMode" (click)="save()">{{savingMode}} DATA</button><br>
+        </div><br>
+             <table class="table text-center ">
+                 <th *ngFor="let head of keys" style="background-color:crimson;color: white;padding: 0.5%;font-weight: 500;">
+                    {{head | uppercase}}</th>
+                 <tr *ngFor="let row of mapping" style="color: grey;">
+                     <td style="padding: 0.2%;">
+                             {{row.subjectcode}} </td> 
+                     <td>{{row.examtype}}</td>
+                     <td *ngIf="row.examtype!='mid2'">{{row.co1}}</td>
+                     <td *ngIf="row.examtype!='mid2'">{{row.co2}}</td>
+                     <td>{{row.co3}}</td>
+                     <td>{{row.co4}}</td>
+                     <td>{{row.co5}}</td>
+                 </tr>
+                 
+             </table>
+    </div>
+     <div >
+     <span style="cursor: pointer;color: crimson;float: right;"><div><strong>Excel Format</strong><br>
+        <table class="table  text-center" style="color:grey;width: 30vw;font-size: 12px;"><tr style="border-bottom:0.5px solid lightgrey">
+            <td >Subjectcode&nbsp;</td><td>&nbsp;examtype&nbsp;</td>
+                <td>&nbsp;CO 1&nbsp;</td><td>&nbsp;
+                    CO 2&nbsp;</td><td>&nbsp;CO 3&nbsp;</td>
+                    <td>&nbsp;CO 4&nbsp;</td><td>&nbsp;CO 5&nbsp;</td></tr><tr></tr>
+            <tr><td style="color: lightblue;">*******</td><td>mid1</td><td>o2,q3,q7</td></tr>
+            <tr><td style="color: lightblue;">*******</td><td>mid2</td><td>o1,q3,q5</td></tr>
+            <tr><td style="color: lightblue;">*******</td><td>external</td><td>q8,q9</td></tr> 
+           </table></div></span><br>
+    </div>
+    </div>
+     <ng-template #saved><br>
+        SUCCESSFULLY SAVED
+    </ng-template>
+</div>
