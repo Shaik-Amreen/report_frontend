@@ -24,7 +24,7 @@ export class CoquesComponent implements OnInit {
     for(let c of this.mapping){
       c.subjectcode=c.subjectcode.toString().toUpperCase();
     }
-    this.http.post<any>('http://localhost:4000/savecoques',{data:this.mapping,name:'coquestion'}).subscribe(
+    this.http.post<any>('/api/savecoques',{data:this.mapping,name:'coquestion'}).subscribe(
       res=>{this.savingMode='Saved';this.mapping=[];this.saveMode=false;this.keys=[]},
       err=>console.log(err)
      );

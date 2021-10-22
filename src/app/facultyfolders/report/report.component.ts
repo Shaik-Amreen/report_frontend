@@ -55,7 +55,7 @@ excos:any=[]
  fetch(){
    this.classinfo.value.subjectcode=this.classinfo.value.subjectcode.toUpperCase()
    this.classinfo.value.subjectname=this.classinfo.value.subjectname.toUpperCase()
-   this.http.post<any>('http://localhost:4000/fetchdata',this.classinfo.value).subscribe(
+   this.http.post<any>('/api/fetchdata',this.classinfo.value).subscribe(
      res=>{if(res.message=='error'){alert('DATA IS INVALID');window.location.reload()}
      else{
       this.roll=res.rollnumbers;this.ques=res.ques;this.am=res.studentdata;this.codetails=res.codetails;this.subjectfaculty=res.subjectfaculty

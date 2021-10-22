@@ -38,7 +38,7 @@ export class SignupComponent implements OnInit {
   onAdminSubmit()
   {
     this.adminSignUpForm.removeControl('confirmpassword')
-    this.http.post<any>('http://localhost:4000/signup',this.adminSignUpForm.value).subscribe(
+    this.http.post<any>('/api/signup',this.adminSignUpForm.value).subscribe(
       res=>{
         if(res.message=='success')
           {

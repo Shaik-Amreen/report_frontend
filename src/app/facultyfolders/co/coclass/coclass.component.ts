@@ -24,7 +24,7 @@ export class CoclassComponent implements OnInit {
     for(let c of this.mapping){
       c.subjectcode=c.subjectcode.toString().toUpperCase();
     }
-    this.http.post<any>('http://localhost:4000/saveco',{data:this.mapping,name:'coclasses'}).subscribe(
+    this.http.post<any>('/api/saveco',{data:this.mapping,name:'coclasses'}).subscribe(
       res=>{this.savingMode='Saved';this.mapping=[];this.saveMode=false;this.keys=[]},
       err=>console.log(err)
      );

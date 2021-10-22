@@ -36,7 +36,7 @@ export class UploadelectivesComponent implements OnInit {
       c.subjectname=c.subjectname.toUpperCase();
       c.subjectcode=c.subjectcode.toString().toUpperCase();
     }
-    this.http.post<any>('http://localhost:4000/uploadelectives',{data:this.mapping,name:this.classinfo.value}).subscribe(
+    this.http.post<any>('/api/uploadelectives',{data:this.mapping,name:this.classinfo.value}).subscribe(
       res=>{if(res.message=='success'){this.savingMode='Saved';this.mapping=[];this.saveMode=false;this.keys=[]}
           else{alert('Student data is not uploaded !');window.location.reload()}},
       err=>console.log(err)

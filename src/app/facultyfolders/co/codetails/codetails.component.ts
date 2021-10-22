@@ -24,7 +24,7 @@ export class CodetailsComponent implements OnInit {
       c.subjectname=c.subjectname.toUpperCase();
       c.subjectcode=c.subjectcode.toString().toUpperCase();
     }
-    this.http.post<any>('http://localhost:4000/saveco',{data:this.mapping,name:'codetails'}).subscribe(
+    this.http.post<any>('/api/saveco',{data:this.mapping,name:'codetails'}).subscribe(
       res=>{this.savingMode='Saved';this.mapping=[];this.saveMode=false;this.keys=[]},
       err=>console.log(err)
      );

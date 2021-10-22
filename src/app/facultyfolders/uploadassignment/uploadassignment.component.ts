@@ -33,7 +33,7 @@ export class UploadassignmentComponent implements OnInit {
   saveMode=false;
  
   save(){
-    this.http.post<any>('http://localhost:4000/uploadassignment',this.classinfo.value).subscribe(
+    this.http.post<any>('/api/uploadassignment',this.classinfo.value).subscribe(
       res=>{if(res.message=='success'){this.savingMode='Saved';this.saveMode=false;}
           else{alert('Student data is not uploaded !');window.location.reload()}},
       err=>console.log(err)
@@ -45,7 +45,7 @@ export class UploadassignmentComponent implements OnInit {
  fetch(){
    this.classinfo.value.subjectcode=this.classinfo.value.subjectcode.toUpperCase();
    this.classinfo.value.section=this.classinfo.value.section.toUpperCase()
-  this.http.post<any>('http://localhost:4000/fetchrollsection',this.classinfo.value).subscribe(
+  this.http.post<any>('/api/fetchrollsection',this.classinfo.value).subscribe(
     res=>{if(res.length!=0){this.data=res;this.fetched=true;this.saveMode=true
     }
         else{alert('Subjects are not uploaded !');window.location.reload()}},

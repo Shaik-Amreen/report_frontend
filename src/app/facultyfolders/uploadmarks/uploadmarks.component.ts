@@ -36,7 +36,7 @@ export class UploadmarksComponent implements OnInit {
  finaldata:any=[]
   save(){
    this.classinfo.value.subjectcode=this.classinfo.value.subjectcode.toUpperCase()
-    this.http.post<any>('http://localhost:4000/uploadmarks',{name:this.classinfo.value,data:this.mapping}).subscribe(
+    this.http.post<any>('/api/uploadmarks',{name:this.classinfo.value,data:this.mapping}).subscribe(
       res=>{if(res.message=='success'){this.savingMode='Saved';this.saveMode=false;}
           else{alert('Student data is not uploaded !');window.location.reload()}},
       err=>console.log(err)
@@ -96,7 +96,7 @@ this.keys.forEach((value:any,key:any) => {
 
  fetch(){
  this.classinfo.value.subjectcode=this.classinfo.value.subjectcode.toString().toUpperCase()
-  this.http.post<any>('http://localhost:4000/fetchroll',this.classinfo.value).subscribe(
+  this.http.post<any>('/api/fetchroll',this.classinfo.value).subscribe(
     res=>{if(res.message!='error'){this.data=res;this.fetched=true;
     }
         else{alert('Subjects are not uploaded !');}},

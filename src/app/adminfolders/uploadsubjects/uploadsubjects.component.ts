@@ -37,7 +37,7 @@ export class UploadsubjectsComponent implements OnInit {
       c.subjectfaculty=c.subjectfaculty.toUpperCase()
     }
     this.classinfo.value.section=this.classinfo.value.section.toUpperCase()
-    this.http.post<any>('http://localhost:4000/uploadsubjects',{data:this.mapping,name:this.classinfo.value}).subscribe(
+    this.http.post<any>('/api/uploadsubjects',{data:this.mapping,name:this.classinfo.value}).subscribe(
       res=>{if(res.message=='success'){this.savingMode='Saved';this.mapping=[];this.saveMode=false;this.keys=[]}
           else{alert('Student data is not uploaded !');window.location.reload()}},
       err=>console.log(err)

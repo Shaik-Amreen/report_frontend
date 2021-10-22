@@ -32,7 +32,7 @@ let qn=new FormArray([])
   saveMode=false;
  
   save(){
-    this.http.post<any>('http://localhost:4000/uploadlabmarks',this.classinfo.value).subscribe(
+    this.http.post<any>('/api/uploadlabmarks',this.classinfo.value).subscribe(
       res=>{if(res.message=='success'){this.savingMode='Saved';this.saveMode=false;}
           else{alert('Student data is not uploaded !');window.location.reload()}},
       err=>console.log(err)
@@ -46,7 +46,7 @@ let qn=new FormArray([])
  fetch(){
    this.classinfo.value.subjectcode=this.classinfo.value.subjectcode.toUpperCase();
    this.classinfo.value.section=this.classinfo.value.section.toUpperCase()
-  this.http.post<any>('http://localhost:4000/fetchrollsection',this.classinfo.value).subscribe(
+  this.http.post<any>('/api/fetchrollsection',this.classinfo.value).subscribe(
     res=>{if(res.length!=0){this.data=res;this.fetched=true;this.saveMode=true
      for(let c of this.data){
       (<FormArray>this.classinfo.get('questions')).push(new FormGroup({

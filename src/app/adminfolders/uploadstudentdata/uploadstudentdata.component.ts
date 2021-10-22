@@ -29,7 +29,7 @@ export class UploadstudentdataComponent implements OnInit {
       c.subjects=[];
       c.marks={}
     }
-    this.http.post<any>('http://localhost:4000/savefile',this.mapping).subscribe(
+    this.http.post<any>('/api/savefile',this.mapping).subscribe(
       res=>{this.savingMode='Saved';this.mapping=[];this.saveMode=false;this.keys=[]},
       err=>console.log(err)
      );

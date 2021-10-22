@@ -3,8 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "concurrently \"cd api && node index.js\" \"ng serve --o\"",
-    "dev": "concurrently \"cd api && node index.js\" \"ng serve --o\"",
+    "start": "ng serve --proxy-config proxyconfig.json --o",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"

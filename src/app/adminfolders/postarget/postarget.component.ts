@@ -25,7 +25,7 @@ export class PostargetComponent implements OnInit {
     for(let c of this.mapping){
       c.subjectcode=c.subjectcode.toString().toUpperCase();
     }
-    this.http.post<any>('http://localhost:4000/saveco',{data:this.mapping,name:'potarget'}).subscribe(
+    this.http.post<any>('/api/saveco',{data:this.mapping,name:'potarget'}).subscribe(
       res=>{this.savingMode='Saved';this.mapping=[];this.saveMode=false;this.keys=[]},
       err=>console.log(err)
      );

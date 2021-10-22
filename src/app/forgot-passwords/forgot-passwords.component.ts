@@ -20,7 +20,7 @@ export class ForgotPasswordsComponent implements OnInit {
   }
 
   onsubmit(f:NgForm){
-    this.http.post<any>('http://localhost:4000/resetpassword',{'mail':localStorage.getItem('mail'),'password':f.value.password}).subscribe(
+    this.http.post<any>('/resetpassword',{'mail':localStorage.getItem('mail'),'password':f.value.password}).subscribe(
       res=>{if(res.message=='success'){this.router.navigate(['/login'])}},
       err=>console.log(err)
     )

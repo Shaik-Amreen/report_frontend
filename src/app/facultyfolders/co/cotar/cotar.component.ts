@@ -37,7 +37,7 @@ export class CotarComponent implements OnInit {
  
   save(){
     let l=[];l.push(this.classinfo.value)
-    this.http.post<any>('http://localhost:4000/saveco',{data:l,name:'cotar'}).subscribe(
+    this.http.post<any>('/api/saveco',{data:l,name:'cotar'}).subscribe(
       res=>{this.savingMode='Saved';this.saveMode=false},
       err=>console.log(err)
      );
@@ -50,7 +50,7 @@ export class CotarComponent implements OnInit {
  fetch(){
    this.classinfo.value.subjectcode=this.classinfo.value.subjectcode.toUpperCase();
    this.classinfo.value.section=this.classinfo.value.section.toUpperCase()
-  this.http.post<any>('http://localhost:4000/fetchrollsection',this.classinfo.value).subscribe(
+  this.http.post<any>('/fetchrollsection',this.classinfo.value).subscribe(
     res=>{if(res.length!=0){this.data=res;this.fetched=true;this.saveMode=true
      for(let c of this.data){
       (<FormArray>this.classinfo.get('questions')).push(new FormGroup({

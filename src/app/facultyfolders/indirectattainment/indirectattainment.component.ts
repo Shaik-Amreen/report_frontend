@@ -38,7 +38,7 @@ export class IndirectattainmentComponent implements OnInit {
   saveMode=false;
  
   save(){
-    this.http.post<any>('http://localhost:4000/feedback',this.classinfo.value).subscribe(
+    this.http.post<any>('/api/feedback',this.classinfo.value).subscribe(
       res=>{if(res.message=='saved'){this.savingMode='Saved';this.saveMode=false;}
           else{alert('Student data is not uploaded !');window.location.reload()}},
       err=>console.log(err)

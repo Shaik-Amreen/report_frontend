@@ -35,7 +35,7 @@ export class CreateuserComponent implements OnInit {
 
   onSubmitUserForm(){
     this.userSignUpForm.removeControl('confirmpassword')
-    this.http.post<any>('http://localhost:4000/signup',this.userSignUpForm.value).subscribe(
+    this.http.post<any>('/api/signup',this.userSignUpForm.value).subscribe(
       res=>{console.log(res);if(res.message=='success'){this.msg=true}
             else{this.errorMsg=res.message}},
       err=>this.errorMsg='User already exists'

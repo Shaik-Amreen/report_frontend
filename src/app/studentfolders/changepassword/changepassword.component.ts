@@ -23,7 +23,7 @@ pass:FormGroup;change=false
        alert('INVALID DETAILS');window.location.reload()
      }
      else{
-      this.http.post<any>('http://localhost:4000/changepassword',this.pass.value).subscribe(
+      this.http.post<any>('/api/changepassword',this.pass.value).subscribe(
         res=>{this.change=true},
         err=>{console.log(err)}
       )

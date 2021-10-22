@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
     })
 
 
-    this.http.post<any>('http://localhost:4000/activesignup',this.signInForm.value).subscribe(
+    this.http.post<any>('/api/activesignup','').subscribe(
       res=>{if(res.message=='admin'){this.activate=true};},
       err=>console.log(err)
      );
@@ -65,8 +65,9 @@ export class LoginComponent implements OnInit {
 
      signIn(){
 
-      this.http.post<any>('http://localhost:4000/login',this.signInForm.value).subscribe(
+      this.http.post<any>('/api/login',this.signInForm.value).subscribe(
         res=>{
+          
           if(res.status=='error'){
               this.errorMode=true;
               this.errorMessage=res.error

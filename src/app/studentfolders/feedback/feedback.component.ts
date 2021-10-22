@@ -31,7 +31,7 @@ export class FeedbackComponent implements OnInit {
       q10:new FormControl('',Validators.required),
     })
 
-    this.http.post<any>('http://localhost:4000/getsubjects',{mail:sessionStorage.getItem('mail')}).subscribe(
+    this.http.post<any>('/api/getsubjects',{mail:sessionStorage.getItem('mail')}).subscribe(
     res=>{this.allsubs=res.subs;this.allsubques=res.subq;console.log(res)},
     err=>{console.log(err)}
 ) }
@@ -39,7 +39,7 @@ export class FeedbackComponent implements OnInit {
 save(){
   this.classinfo.value.roll=sessionStorage.getItem('mail')
   this.classinfo.value.subjectcode=this.feedsub;
-  this.http.post<any>('http://localhost:4000/studentfeedback',this.classinfo.value).subscribe(
+  this.http.post<any>('/api/studentfeedback',this.classinfo.value).subscribe(
     res=>{this.savedfeed=true},
     err=>{console.log(err)}
   )
